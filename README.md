@@ -24,10 +24,21 @@ aws_access_key = "xxxxxx"
 aws_secret_key = "yyyyyy"
 ```
 
-のち
+## 反映
 
 ```
 terraform apply
+```
+
+## graph
+
+```
+brew install graphviz
+```
+
+出力
+```
+terraform graph | dot -Tpng > graph.png
 ```
 
 # shells
