@@ -61,7 +61,18 @@ resource "aws_opsworks_stack" "opsworks-web-green" {
     manage_berkshelf = true
     berkshelf_version = "3.2.0"
 }
-resource "aws_opsworks_static_web_layer" "web-green" {
+resource "aws_opsworks_custom_layer" "web-green" {
+    name = "web-green-layer"
+    short_name = "web-layer"
     stack_id = "${aws_opsworks_stack.opsworks-web-green.id}"
+    custom_security_group_ids = [
+        "${aws_security_group.admin.id}",
+        "${aws_security_group.web.id}"
+    ]
     auto_assign_public_ips = true
+
+    custom_setup_recipes = [
+        "server::default",
+        "nginx::default"
+    ]
 }
